@@ -76,6 +76,8 @@ int match(char *regex, char *str) {
   
     rc = pcre_exec(re, NULL, str, strlen(str), 0, 0, ovector, 30);
 
+    pcre_free(re);
+
     if (rc > 0) {
       /*sucess*/
       return 1;
