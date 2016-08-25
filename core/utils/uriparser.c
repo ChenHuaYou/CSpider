@@ -20,16 +20,16 @@ parseuris(const char* basestr, const char *uristr){
 
     rel = uri_create_str(uristr, NULL);
     if(!rel) {
-	  uri_destroy(base);
+      uri_destroy(base);
       return NULL;
-	}
+    }
 
     uri = uri_create_uri(rel, base);
 
-	uri_destroy(base);
-	uri_destroy(rel);
+    uri_destroy(base);
+    uri_destroy(rel);
     
-	if(!uri)
+    if(!uri)
       return NULL;
 
     return uri;
