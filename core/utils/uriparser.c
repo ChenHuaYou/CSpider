@@ -19,15 +19,18 @@ parseuris(const char* basestr, const char *uristr){
       return NULL;
 
     rel = uri_create_str(uristr, NULL);
-    if(!rel)
+    if(!rel) {
+	  uri_destroy(base);
       return NULL;
+	}
 
     uri = uri_create_uri(rel, base);
-    if(!uri)
-      return NULL;
 
-    uri_destroy(base);
-    uri_destroy(rel);
+	uri_destroy(base);
+	uri_destroy(rel);
+    
+	if(!uri)
+      return NULL;
 
     return uri;
   }
@@ -53,8 +56,10 @@ get_uri(URI *uri) {
     return NULL;
 
   len = uri_str(uri, buffer, len);
-  if(len == (size_t) -1)
+  if(len == (size_t) -1) {
+    free(buffer);
     return NULL;
+  }
 
   return buffer;
 }
